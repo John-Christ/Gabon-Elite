@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique Artisanale | Gabonbelle - L'Héritage Précieux</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --gold: #D4AF37; 
+            --gold-hover: #f1c40f;
+            --dark: #0a0a0a; 
+            --dark-soft: #141414;
+            --glass: rgba(10, 10, 10, 0.95);
+            --white: #ffffff; 
+        }
+
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--dark); color: var(--white); overflow-x: hidden; }
+
+        /* --- NAVIGATION PRINCIPALE --- */
+        nav { 
+            position: fixed; top: 0; width: 100%; padding: 10px 6%; 
+            display: flex; justify-content: space-between; align-items: center; 
+            background: var(--glass); backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1); z-index: 10000;
+        }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; text-decoration: none; color: white; }
+        .logo span { color: var(--gold); font-style: italic; }
+
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav ul li a { color: white; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- MENU SECONDAIRE (CATÉGORIES) --- */
+        .category-nav {
+            margin-top: 80px; /* Juste en dessous du menu principal */
+            background: var(--dark-soft);
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            border-bottom: 1px solid #222;
+            position: sticky;
+            top: 60px; /* Fixé lors du scroll */
+            z-index: 999;
+        }
+        .cat-btn {
+            background: transparent;
+            border: 1px solid #333;
+            color: #888;
+            padding: 8px 20px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .cat-btn:hover, .cat-btn.active {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* --- GRILLE DE PRODUITS --- */
+        .shop-container { padding: 50px 8%; }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* Animation de filtrage */
+        .product-card {
+            background: #111;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #222;
+            transition: 0.4s;
+            display: block; /* Nécessaire pour le filtrage */
+        }
+        .product-card.hide { display: none; }
+        .product-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+
+        .product-img {
+            width: 100%;
+            height: 300px;
+            background: #000;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        .product-card:hover .product-img img { transform: scale(1.1); }
+
+        .tag { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+        .product-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 5px 0; }
+        .price { color: var(--white); font-weight: 600; font-size: 1.1rem; }
+
+        /* --- WHATSAPP --- */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px;
+            background-color: var(--gold); width: 60px; height: 60px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; z-index: 10000;
+        }
+        .whatsapp-float svg { width: 30px; fill: black; }
+
+        .btn-buy {
+            margin-top: 15px;
+            width: 100%;
+            background: var(--gold);
+            color: black;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-buy:hover { background: white; }
+
+        @media (max-width: 768px) {
+            .category-nav { flex-wrap: wrap; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">GABON<span>BELLE</span></a>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="boutique.html" style="color:var(--gold)">Boutique</a></li>
+            <li><a href="index.html#tourisme">Tourisme</a></li>
+            <li><a href="index.html#hotels">Hôtels</a></li>
+            <li><a href="index.html#account">Compte</a></li>
+        </ul>
+    </nav>
+
+    <div class="category-nav">
+        <button class="cat-btn active" onclick="filterShop('all')">Tout voir</button>
+        <button class="cat-btn" onclick="filterShop('masque')">Masques de Collection</button>
+        <button class="cat-btn" onclick="filterShop('bijou')">Bijoux Or & Argent</button>
+        <button class="cat-btn" onclick="filterShop('statue')">Statues Traditionnelles</button>
+        <button class="cat-btn" onclick="filterShop('argent')">Accessoires Argent</button>
+    </div>
+
+    <section class="shop-container">
+        <h1 style="font-family: 'Playfair Display', serif; text-align: center; color: var(--gold); font-size: 3rem;">Le Marché Artisanal</h1>
+        <p style="text-align: center; color: #888; margin-bottom: 50px;">Sélection de pièces uniques issues du dossier "artisanal-market".</p>
+
+        <div class="product-grid" id="shopGrid">
+            
+            <div class="product-card masque">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1518998053574-53f0201f871e?auto=format&fit=crop&w=600" alt="Masque">
+                </div>
+                <span class="tag">Masque Punu / Collection</span>
+                <h3 class="product-title">Masque Okuyi Blanc</h3>
+                <p class="price">1,200 €</p>
+                <button class="btn-buy">Ajouter au panier</button>
+            </div>
+
+            <div class="product-card bijou">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600" alt="Collier">
+                </div>
+                <span class="tag">Bijou / Or 18k</span>
+                <h3 class="product-title">Collier "Soleil de l'Ogooué"</h3>
+                <p class="price">2,450 €</p>
+                <button class="btn-buy">Ajouter au panier</button>
+            </div>
+
+            <div class="product-card bijou argent">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600" alt="Bracelet">
+                </div>
+                <span class="tag">Accessoire / Argent Massif</span>
+                <h3 class="product-title">Bracelet Guerrier Teké</h3>
+                <p class="price">850 €</p>
+                <button class="btn-buy">Ajouter au panier</button>
+            </div>
+
+            <div class="product-card statue">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&w=600" alt="Statue">
+                </div>
+                <span class="tag">Statue / Bois Précieux</span>
+                <h3 class="product-title">Gardien Reliquaire Kota</h3>
+                <p class="price">3,200 €</p>
+                <button class="btn-buy">Ajouter au panier</button>
+            </div>
+
+            </div>
+    </section>
+
+    <a href="https://wa.me/24100000000" class="whatsapp-float">
+        <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.7-16.6-14.8-27.8-33.2-31.1-38.7-3.2-5.5-.3-8.5 2.5-11.2 2.5-2.5 5.6-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.6-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    </a>
+
+    <script>
+        // FONCTION DE FILTRAGE DYNAMIQUE
+        function filterShop(category) {
+            const cards = document.querySelectorAll('.product-card');
+            const btns = document.querySelectorAll('.cat-btn');
+
+            // Mise à jour des boutons
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filtrage des cartes avec animation
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.classList.remove('hide');
+                } else {
+                    if (card.classList.contains(category)) {
+                        card.classList.remove('hide');
+                    } else {
+                        card.classList.add('hide');
+                    }
+                }
+            });
+        }
+
+        // PERSISTANCE DU SCROLL
+        window.addEventListener('scroll', () => {
+            localStorage.setItem('scroll_shop', window.scrollY);
+        });
+        window.addEventListener('load', () => {
+            const pos = localStorage.getItem('scroll_shop');
+            if(pos) window.scrollTo({ top: parseInt(pos), behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
