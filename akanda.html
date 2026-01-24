@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parc National d'Akanda | Gabonbelle - Le Royaume des Mangroves</title>
+    <title>Parc National d'Akanda | Gabonbelle - Prestige Littoral</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -18,7 +18,7 @@
         * { box-sizing: border-box; scroll-behavior: smooth; }
         body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--dark); color: var(--white); line-height: 1.7; }
         
-        /* --- NAVIGATION (Identique Index) --- */
+        /* --- NAVIGATION --- */
         nav { 
             position: fixed; top: 0; width: 100%; padding: 15px 6%; 
             display: flex; justify-content: space-between; align-items: center; 
@@ -40,27 +40,47 @@
         }
         nav ul li a:hover { color: var(--gold); }
 
-        /* --- HERO AKANDA --- */
+        /* --- HERO SECTION AVEC IMAGE HD --- */
         .hero-akanda { 
-            height: 70vh; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), 
-            url('https://images.unsplash.com/photo-1544551763-47a0159f963f?auto=format&fit=crop&w=1920&q=80'); 
-            background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            height: 80vh; 
+            /* Image de remplacement de haute qualité (Mangroves & Littoral) */
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), 
+            url('https://images.unsplash.com/photo-1544551763-47a0159f963f?q=80&w=2070&auto=format&fit=crop'); 
+            background-size: cover; 
+            background-position: center;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center;
+            border-bottom: 2px solid var(--gold);
         }
-        .hero-akanda h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--gold); }
+        .hero-akanda h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(2.5rem, 6vw, 4.5rem); 
+            color: var(--gold); 
+            margin: 0;
+            text-shadow: 2px 4px 20px rgba(0,0,0,0.9);
+        }
+        .hero-akanda p {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: white;
+            text-shadow: 1px 2px 10px rgba(0,0,0,0.8);
+        }
 
-        /* --- CONTENT DESIGN --- */
+        /* --- CONTENT --- */
         section { padding: 80px 10%; }
         .container-slim { max-width: 900px; margin: 0 auto; }
         h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-top: 40px; }
-        .subtitle-page { color: #888; font-style: italic; font-size: 1.1rem; margin-bottom: 30px; display: block; }
-
+        
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin: 40px 0; }
         .feature-card { background: var(--dark-soft); border-radius: 12px; padding: 30px; border: 1px solid #222; transition: 0.3s; }
         .feature-card:hover { border-color: var(--gold); transform: translateY(-5px); }
         .feature-card h3 { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-top: 0; }
 
-        /* --- WHATSAPP (Identique Index) --- */
+        /* --- WHATSAPP --- */
         .whatsapp-float {
             position: fixed; bottom: 30px; right: 30px;
             background-color: var(--gold); color: black;
@@ -71,7 +91,7 @@
             text-decoration: none; font-size: 30px;
         }
         .whatsapp-float:hover { background-color: var(--white); transform: scale(1.1); }
-        .whatsapp-float svg { width: 35px; fill: black; }
+        .whatsapp-float svg { width: 30px; fill: black; }
 
         .btn { 
             background: var(--gold); color: black; padding: 15px 35px; border: none; 
@@ -106,60 +126,43 @@
 
     <section>
         <div class="container-slim">
-            <h2>Une Immersion aux Portes de Libreville</h2>
-            <span class="subtitle-page">Le poumon vert de l'Estuaire, refuge mondial des oiseaux migrateurs.</span>
-            
-            <p>Situé au Nord-Est de la capitale, le <strong>Parc National d'Akanda</strong> est un écosystème unique, dominé par l'une des mangroves les plus vastes et les mieux préservées d'Afrique Centrale. C'est ici que la forêt gabonaise rencontre l'Océan Atlantique dans un ballet permanent de marées.</p>
+            <h2>L'Émeraude de l'Estuaire</h2>
+            <p>Situé aux portes de Libreville, le <strong>Parc National d'Akanda</strong> est un chef-d'œuvre de la nature où les mangroves labyrinthiques rencontrent les vagues de l'Atlantique. C'est l'un des sites les plus importants au monde pour la protection des oiseaux migrateurs et des tortues marines.</p>
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <h3>Ornithologie VIP</h3>
-                    <p>Akanda accueille jusqu'à 40 000 oiseaux migrateurs chaque année. Un paradis pour les observateurs recherchant le Chevalier arlequin ou le Bécasseau cocorli.</p>
+                    <h3>Observation d'Oiseaux</h3>
+                    <p>Accueillez des milliers d'oiseaux migrateurs venant d'Europe et d'Asie dans un cadre préservé unique au Gabon.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Tortues Luths</h3>
-                    <p>Entre novembre et février, les plages isolées du parc deviennent le théâtre de la ponte des tortues luths, les plus grandes tortues marines au monde.</p>
+                    <h3>Labyrinthe de Mangroves</h3>
+                    <p>Naviguez en silence à travers les palétuviers pour découvrir une biodiversité marine exceptionnelle.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Mangroves Sacrées</h3>
-                    <p>Explorez en bateau privé les chenaux labyrinthiques bordés de palétuviers, un filtre biologique vital pour la vie marine du Gabon.</p>
+                    <h3>Pontes de Tortues</h3>
+                    <p>Observez le spectacle émouvant des tortues luths venant confier leurs œufs aux plages sauvages du parc.</p>
                 </div>
             </div>
 
-            <h2>L'Expérience Gabonbelle à Akanda</h2>
-            <p>Malgré sa proximité avec la ville, Akanda offre une déconnexion totale. Nous organisons pour nos clients des expéditions exclusives à la journée ou des bivouacs de luxe sur les îles du parc.</p>
-            
-            <div style="background:#111; padding:30px; border-radius:10px; margin:40px 0; border-left: 4px solid var(--gold);">
-                <h3 style="color:var(--gold); margin-top:0;">Services Exclusifs :</h3>
-                <ul style="list-style: none; padding:0;">
-                    <li>✓ Privatisation de vedettes rapides grand confort.</li>
-                    <li>✓ Guides naturalistes experts en écosystèmes marins.</li>
-                    <li>✓ Déjeuners gastronomiques "Pieds dans l'eau" sur banc de sable.</li>
-                    <li>✓ Matériel d'observation optique de haute précision (Swarovski/Leica).</li>
+            <div style="background:#111; padding:40px; border-radius:10px; margin:50px 0; border-left: 5px solid var(--gold);">
+                <h3 style="color:var(--gold); margin-top:0;">Services Gabonbelle :</h3>
+                <ul style="color:#ccc;">
+                    <li>Excursions privées en vedette rapide.</li>
+                    <li>Guides naturalistes bilingues experts.</li>
+                    <li>Pique-nique de luxe sur bancs de sable isolés.</li>
+                    <li>Matériel de vision nocturne pour les tortues.</li>
                 </ul>
             </div>
 
-            <p>Akanda est également le lieu idéal pour la pêche sportive côtière et la découverte des rites ancestraux des populations locales vivant en harmonie avec la mer.</p>
-
-            <div style="text-align:center; margin-top:60px;">
-                <a href="index.html#account" class="btn">Réserver une Escapade Exclusive</a>
+            <div style="text-align:center;">
+                <a href="index.html#account" class="btn">Réserver une Expédition</a>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Gabonbelle Luxury Safari. Akanda : La sentinelle de l'Estuaire.</p>
+        <p>&copy; 2026 Gabonbelle. L'excellence au cœur de la nature gabonaise.</p>
     </footer>
 
-    <script>
-        // Persistance du scroll pour cette page
-        window.addEventListener('scroll', () => {
-            localStorage.setItem('scrollPos_akanda', window.scrollY);
-        });
-        window.addEventListener('load', () => {
-            const pos = localStorage.getItem('scrollPos_akanda');
-            if(pos) window.scrollTo({ top: parseInt(pos), behavior: 'smooth' });
-        });
-    </script>
 </body>
 </html>
