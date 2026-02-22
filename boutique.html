@@ -341,6 +341,38 @@
             const pos = localStorage.getItem('scroll_shop');
             if(pos) window.scrollTo({ top: parseInt(pos), behavior: 'smooth' });
         });
+
+
+           // Mise à jour visuelle du menu actif
+            let current = "";
+            const sections = document.querySelectorAll("section, header");
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            document.querySelectorAll(".nav-link").forEach((a) => {
+                a.classList.remove("active");
+                if (a.getAttribute("href").includes(current)) {
+                    a.classList.add("active");
+                }
+            });
+        });
+
+        // 2. RESTAURATION AU CHARGEMENT
+        window.addEventListener('load', () => {
+            const savedScroll = localStorage.getItem('gabonbelle_scroll');
+            if (savedScroll) {
+                window.scrollTo({
+                    top: parseInt(savedScroll),
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        
     </script>
 </body>
 </html>
