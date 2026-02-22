@@ -124,8 +124,11 @@
         }
         .btn-buy:hover { background: white; }
 
-        @media (max-width: 768px) {
-            .category-nav { flex-wrap: wrap; padding: 10px; }
+            /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            nav { flex-direction: column; padding: 20px; }
+            nav ul { margin-top: 15px; gap: 15px; flex-wrap: wrap; justify-content: center; }
+            section { padding: 80px 5%; }
         }
     </style>
 </head>
