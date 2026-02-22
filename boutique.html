@@ -140,13 +140,47 @@
             nav ul { margin-top: 15px; gap: 15px; flex-wrap: wrap; justify-content: center; }
             section { padding: 80px 5%; }
         }
+
+/* Hidden by default (Laptop) */
+.menu-toggle { 
+    display: none; 
+    flex-direction: column; 
+    gap: 5px; 
+}
+
+/* Shown only on Mobile */
+@media (max-width: 900px) {
+    .menu-toggle { 
+        display: flex; 
+    }
+    
+    /* Position the actual menu off-screen to the right */
+    nav ul {
+        position: fixed;
+        right: -100%; /* Hides the menu */
+        transition: 0.4s;
+    }
+
+    /* When the 'active' class is added via JS, slide it in */
+    nav ul.active {
+        right: 0;
+    }
+}
+
+        
     </style>
 </head>
 <body>
 
     <nav>
         <a href="index.html" class="logo">GABON<span>BELLE</span></a>
-        <ul>
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <ul id="nav-list">
             <li><a href="index.html" class="nav-link">Accueil</a></li>
             <li><a href="boutique.html" class="nav-link" style="color:var(--gold)">Boutique</a></li>
             <li><a href="akanda.html" class="nav-link">Tourisme</a></li>
@@ -372,6 +406,33 @@
             }
         });
 
+
+
+        /* Hidden by default (Laptop) */
+.menu-toggle { 
+    display: none; 
+    flex-direction: column; 
+    gap: 5px; 
+}
+
+/* Shown only on Mobile */
+@media (max-width: 900px) {
+    .menu-toggle { 
+        display: flex; 
+    }
+    
+    /* Position the actual menu off-screen to the right */
+    nav ul {
+        position: fixed;
+        right: -100%; /* Hides the menu */
+        transition: 0.4s;
+    }
+
+    /* When the 'active' class is added via JS, slide it in */
+    nav ul.active {
+        right: 0;
+    }
+}
         
     </script>
 </body>
