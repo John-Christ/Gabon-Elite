@@ -127,10 +127,15 @@
                 <label>Mot de passe</label>
                 <input type="password" id="signup-password" required>
             </div>
-            <button type="submit" class="btn-login">S'enregistrer</button>
-            <p style="text-align:center; font-size:0.8rem; margin-top:15px;">
-                Déjà client ? <a href="#" onclick="toggleAuth()" style="color:var(--gold);">Se connecter</a>
-            </p>
+       <button type="submit" id="login-btn" class="btn-login">
+    <span id="login-loader" class="loader hidden-loader"></span>
+    <span id="login-text">Se connecter</span>
+</button>
+
+<button type="submit" id="signup-btn" class="btn-login" onclick="toggleAuth()">
+    <span id="signup-loader" class="loader hidden-loader"></span>
+    <span id="signup-text">S'enregistrer</span>
+</button>
             <p id="signup-msg" style="text-align:center; font-size:0.8rem; margin-top:10px;"></p>
         </form>
     </div>
@@ -199,11 +204,32 @@ function toggleAuth() {
     document.getElementById('signup-section').classList.toggle('hidden');
 }
 
+
+
+
+// Fonction universelle pour gérer l'état du bouton
+function setSubmitting(formType, isSubmitting) {
+    const btn = document.getElementById(`${formType}-btn`);
+    const loader = document.getElementById(`${formType}-loader`);
+    const text = document.getElementById(`${formType}-text`);
+    const msg = document.getElementById(`${formType}-msg`);
+
+    if (isSubmitting) {
+        btn.disabled = true;
+        loader.classList.remove('hidden-loader');
+        text.innerText = formType === 'login' ? "Vérification..." : "Création...";
+        msg.innerText = ""; // On efface les anciens messages d'erreur
+    } else {
+        btn.disabled = false;
+        loader.classList.add('hidden-loader');
+        text.innerText = formType === 'login' ? "Se connecter" : "S'enregistrer";
+    }
+}
+
 // GESTION INSCRIPTION
 document.getElementById('signupForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const msg = document.getElementById('signup-msg');
-    msg.innerText = "Création du compte...";
+    setSubmitting('signup', true); // ACTIVER LOADER
 
     const payload = {
         action: "signup",
@@ -218,21 +244,27 @@ document.getElementById('signupForm').addEventListener('submit', function(e) {
     })
     .then(res => res.json())
     .then(data => {
+        setSubmitting('signup', false); // STOP LOADER
+        const msg = document.getElementById('signup-msg');
         if(data.result === "success") {
             msg.style.color = "var(--gold)";
-            msg.innerText = data.message + " Vous pouvez vous connecter.";
-            setTimeout(toggleAuth, 2000); // Retour au login après 2s
+            msg.innerText = data.message;
+            setTimeout(toggleAuth, 2000);
         } else {
             msg.style.color = "var(--error)";
             msg.innerText = data.message;
         }
+    })
+    .catch(() => {
+        setSubmitting('signup', false);
+        document.getElementById('signup-msg').innerText = "Erreur réseau.";
     });
 });
 
 // GESTION CONNEXION
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const msg = document.getElementById('login-msg');
+    setSubmitting('login', true); // ACTIVER LOADER
     
     const payload = {
         action: "login",
@@ -251,11 +283,21 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
             localStorage.setItem('gb_user_name', data.name);
             location.reload();
         } else {
+            setSubmitting('login', false); // STOP LOADER UNIQUEMENT SI ERREUR
+            const msg = document.getElementById('login-msg');
             msg.style.color = "var(--error)";
             msg.innerText = data.message;
         }
+    })
+    .catch(() => {
+        setSubmitting('login', false);
+        document.getElementById('login-msg').innerText = "Erreur serveur.";
     });
 });
+
+
+
+        
 
         function logout() {
             localStorage.removeItem('gb_logged_in');
