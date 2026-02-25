@@ -198,7 +198,7 @@
             </div>
 
             <div style="text-align:center;">
-                <a href="bouquets.html" class="btn">Réserver une Expédition</a>
+                <a href="bouquets.html" class="btn" onclick="reserverService('Safari Akanda Prestige', '4500')">Réserver une Expédition</a>
             </div>
         </div>
     </section>
@@ -208,6 +208,10 @@
     </footer>
 
     <script>
+
+
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxT9HMjOOywNt_03qrPtZcR8-dBUicv7dvs2J-Pvi_gixVGPJ8Z-74u9BYWC9e1Me3u/exec";
+        
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('nav-menu');
 
@@ -219,6 +223,40 @@
         document.querySelectorAll('nav ul li a').forEach(n => n.addEventListener('click', () => {
             navMenu.classList.remove('active');
         }));
+
+
+
+
+
+
+
+        function reserverService(nomService, prixService) {
+    const userEmail = localStorage.getItem('gb_user_email'); // Assurez-vous de stocker l'email au login
+    
+    if (!localStorage.getItem('gb_logged_in')) {
+        alert("Veuillez vous connecter pour réserver ce service.");
+        window.location.href = "account.html";
+        return;
+    }
+
+    // Afficher un petit indicateur de chargement si vous voulez
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+            action: "addOrder",
+            email: userEmail,
+            service: nomService,
+            price: prixService
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.result === "success") {
+            alert("Ajouté à vos services en attente !");
+            window.location.href = "services.html"; // Redirige vers le panier/paiement
+        }
+    });
+}
     </script>
 
 </body>
