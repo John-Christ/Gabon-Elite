@@ -198,7 +198,7 @@
             </div>
 
             <div style="text-align:center;">
-                <a href="bouquets.html" class="btn" onclick="reserverService('Safari Akanda Prestige', '4500')">Réserver une Expédition</a>
+                <a  class="btn" onclick="reserverService('Safari Akanda Prestige', '4500')">Réserver une Expédition</a>
             </div>
         </div>
     </section>
@@ -235,7 +235,7 @@
     
     if (!localStorage.getItem('gb_logged_in')) {
         alert("Veuillez vous connecter pour réserver ce service.");
-        window.location.href = "account.html";
+        window.location.href = "commandes.html";
         return;
     }
 
@@ -253,7 +253,7 @@
     .then(data => {
         if(data.result === "success") {
             alert("Ajouté à vos services en attente !");
-            window.location.href = "services.html"; // Redirige vers le panier/paiement
+            window.location.href = "commandes.html"; // Redirige vers le panier/paiement
         }
     });
 }
