@@ -231,7 +231,7 @@
 
 
         function reserverService(nomService, prixService) {
-    const userEmail = localStorage.getItem('gb_user_email'); // Assurez-vous de stocker l'email au login
+    const userEmail = localStorage.getItem('gb_email'); // Assurez-vous de stocker l'email au login
     
     if (!localStorage.getItem('gb_logged_in')) {
         alert("Veuillez vous connecter pour réserver ce service.");
