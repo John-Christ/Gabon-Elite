@@ -242,7 +242,7 @@
             const userEmail = localStorage.getItem('gb_email');
             const btn = document.getElementById('btn-reserver');
             
-            if (!localStorage.getItem('gb_logged_in')) {
+            if (!localStorage.getItem('gb_logged')) {
                 showModal("Connexion Requise", "Veuillez vous connecter pour réserver votre expérience exclusive.");
                 setTimeout(() => { window.location.href = "account.html"; }, 2500);
                 return;
