@@ -156,6 +156,18 @@
             document.getElementById('auth-msg').innerText = "";
         }
 
+           
+        
+        function setLoad(type, loading) {
+            const btn = document.getElementById(`btn-${type}`);
+            const ld = document.getElementById(`ld-${type}`);
+            const tx = document.getElementById(`txt-${type}`);
+            btn.disabled = loading;
+            ld.classList.toggle('hidden', !loading);
+            tx.innerText = loading ? "Vérification..." : (type === 'l' ? "Se connecter" : "S'enregistrer");
+        }
+        
+
         // --- AUTH LOGIC ---
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
