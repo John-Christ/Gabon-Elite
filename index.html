@@ -152,8 +152,46 @@
     <section id="boutique">
         <h2>Boutique - La Galerie Royale</h2>
         <span class="subtitle">Art Ancestral & Pièces de Collection certifiées. <a href="boutique.html"  style="color:green;">Continuez</a> </span>
+
+
+         <div class="product-card">
+    <div class="product-img">
+        <img src="https://lh3.googleusercontent.com/JghVulFB0klespLN6Y-EvNcqdMBzO_EwxwLtLtfdPSqa15ZA3t9b86nsZr3nhWZtcg_M1f5r06m0tftATA=s265-w265-h265" alt="Masque Punu">
+    </div>
+    <div class="product-title">Masque Punu Authentique</div>
+    <p>Représentation de la beauté spirituelle, bois sacré et précieux.</p>
+    <div class="product-price">19,250 $</div>
+    <button class="btn" onclick="acquerirProduit('Masque Punu Authentique', '19250', 'https://www.paypal.com/ncp/payment/XVK5XKPWJ5EX6')">
+        Acquérir l'Héritage
+    </button>
+</div>
+
+<div class="product-card">
+    <div class="product-img">
+        <img src="https://lh3.googleusercontent.com/Sb3SBGr_8AYM9D-gj-5uPMv2VbDFHStiTIg60DFOpMf4kd6vmR02NUGRL-tc9vzfl3R69Q7Fss4Sie5K2g=s265-w265-h265" alt="Collier Eden">
+    </div>
+    <div class="product-title">Collier Eden</div>
+    <p>Art ancien illustrant la culture. Ivindo en argent pur</p>
+    <div class="product-price">39,800 $</div>
+    <button class="btn" onclick="acquerirProduit('Collier Eden', '39800', 'https://www.paypal.com/ncp/payment/LXHL3XYZWCAEW')">
+        Acquérir l'Héritage
+    </button>
+</div>
+
+<div class="product-card">
+    <div class="product-img">
+        <img src="https://lh3.googleusercontent.com/e9AdcGEJq3KfIZ1w6l-TBfBb8YK7oTD1aDbI86LByeD0qDO7TjHRSCLtaz3BR82TVWlbyJQs54G-dp0mvw=s265-w265-h265" alt="Collier Raphia">
+    </div>
+    <div class="product-title">Collier Raphia de l'Ogooué</div>
+    <p>Tissage royal aux motifs géométriques complexes fait main.</p>
+    <div class="product-price">45,000 $</div>
+    <button class="btn" onclick="acquerirProduit('Collier Raphia de l\'Ogooué', '45000', 'https://www.paypal.com/ncp/payment/RDVYSGSQEABNC')">
+        Acquérir l'Héritage
+    </button>
+</div>
+
         
-        <div class="shop-grid">
+        <!-- div class="shop-grid">
             <div class="product-card">
                 <div class="product-img">
                     <img src="https://lh3.googleusercontent.com/JghVulFB0klespLN6Y-EvNcqdMBzO_EwxwLtLtfdPSqa15ZA3t9b86nsZr3nhWZtcg_M1f5r06m0tftATA=s265-w265-h265" alt="Masque Punu">
@@ -183,7 +221,7 @@
                 <div class="product-price">45,000 $</div>
               <a href="https://www.paypal.com/ncp/payment/RDVYSGSQEABNC">   <button class="btn">Acquérir l'Héritage</button> </a>
             </div>
-        </div>
+    </div -->
     </section>
 
     <section id="akanda">
@@ -297,6 +335,51 @@
                 document.getElementById('msg').innerHTML = "Bienvenue dans le cercle Gabonbelle. Un conseiller vous contactera.";
             }, 2000);
         });
+
+
+      const SCRIPT_URL = "VOTRE_URL_SCRIPT_DEPLOYE_ICI"; // Remplacez par votre URL
+
+function acquerirProduit(nom, prix, paypalLink) {
+    if (!localStorage.getItem('gb_logged')) {
+        alert("Veuillez vous connecter à votre espace membre pour acquérir cette pièce.");
+        window.location.href = "#account";
+        return;
+    }
+
+    const email = localStorage.getItem('gb_email');
+    const btn = event.target;
+    const originalText = btn.innerText;
+    
+    btn.innerText = "Inscription...";
+    btn.style.opacity = "0.7";
+    btn.disabled = true;
+
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+            action: "addOrder",
+            email: email,
+            service: nom,
+            price: prix,
+            paypalLink: paypalLink
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.result === "success") {
+            alert("Cette pièce a été ajoutée à votre compte. Vous allez être redirigé vers le paiement sécurisé.");
+            window.open(paypalLink, '_blank');
+            window.location.href = "account.html";
+        }
+    })
+    .catch(err => {
+        alert("Erreur de connexion.");
+        btn.innerText = originalText;
+        btn.disabled = false;
+    });
+}
+
+        
     </script>
 </body>
 </html>
