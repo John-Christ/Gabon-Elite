@@ -150,9 +150,10 @@
         document.getElementById('current-date').innerText = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 
         function toggleAuth() {
+           // signup-box - auth-msg
             document.getElementById('login-box').classList.toggle('hidden');
-            document.getElementById('signup-box').classList.toggle('hidden');
-            document.getElementById('auth-msg').innerText = "";
+            document.getElementById('auth-msg').classList.toggle('hidden');
+            document.getElementById('signup-box').innerText = "";
         }
 
         // --- AUTH LOGIC ---
