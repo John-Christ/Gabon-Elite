@@ -270,8 +270,8 @@ function reserverService(nomService, prixService) {
     .then(res => res.json())
     .then(data => {
         if(data.result === "success") {
-            showModal("Prestige Akanda", "Votre réservation a été enregistrée. Retrouvez votre lien de paiement dans votre espace compte.");
-            setTimeout(() => { window.location.href = "account.html"; }, 2500);
+            showModal("Prestige Akanda", "Votre réservation a été enregistrée. Effectuez votre paiement dans votre espace compte.");
+            setTimeout(() => { window.location.href = "account.html"; }, 3000);
         } else {
             resetButton(btn);
             showModal("Erreur", data.message || "Une erreur est survenue.");
