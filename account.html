@@ -76,6 +76,8 @@
 
     <nav>
         <a href="index.html" class="logo">GABON<span>BELLE</span></a>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+
         <ul id="nav-menu">
             <li><a href="index.html">Accueil</a></li>
             <li><a href="boutique.html">Boutique</a></li>
@@ -147,6 +149,13 @@
     <script>
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxT9HMjOOywNt_03qrPtZcR8-dBUicv7dvs2J-Pvi_gixVGPJ8Z-74u9BYWC9e1Me3u/exec"; // <--- REMPLACER PAR VOTRE URL DE SCRIPT
 
+
+        // Navigation Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+        
         document.getElementById('current-date').innerText = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 
         function toggleAuth() {
