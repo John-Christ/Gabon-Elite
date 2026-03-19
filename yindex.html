@@ -278,7 +278,44 @@
 
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxT9HMjOOywNt_03qrPtZcR8-dBUicv7dvs2J-Pvi_gixVGPJ8Z-74u9BYWC9e1Me3u/exec";
 
-        function acquerirProduit(nom, prix, paypalLink) {
+    function acquerirProduit(nom, prix, paypalLink) {
+    // On récupère l'email ou on met une valeur par défaut
+    const email = localStorage.getItem('gb_email') || "Client non connecté";
+    const btn = event.target;
+    const originalText = btn.innerText;
+    
+    // Feedback visuel
+    btn.innerText = "Redirection...";
+    btn.style.opacity = "0.7";
+    btn.disabled = true;
+
+    // Nous utilisons 'navigator.sendBeacon' ou nous lançons le fetch 
+    // mais nous redirigeons IMMÉDIATEMENT sans attendre la réponse complète
+    // pour éviter que le navigateur ne considère cela comme une popup non sollicitée.
+    
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Utilisation de no-cors pour une exécution plus rapide "fire and forget"
+        body: JSON.stringify({
+            action: "addOrder",
+            email: email,
+            service: nom,
+            price: prix,
+            paypalLink: paypalLink
+        })
+    }).catch(err => console.log("Erreur de log, mais poursuite de l'achat."));
+
+    // Redirection sur la même fenêtre (évite les bloqueurs de popups)
+    // Un délai de 300ms laisse au fetch le temps de s'initier
+    setTimeout(() => {
+        window.location.href = paypalLink;
+    }, 200);
+}
+
+
+
+        
+      /*  function acquerirProduit(nom, prix, paypalLink) {
             // Suppression de la condition gb_logged pour autoriser l'achat sans login
             const email = localStorage.getItem('gb_email') || "Client non connecté";
             const btn = event.target;
@@ -314,7 +351,7 @@
                 btn.style.opacity = "1";
                 btn.disabled = false;
             });
-        }
+        }  */
     </script>
 </body>
 </html>
