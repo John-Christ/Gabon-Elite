@@ -293,7 +293,7 @@
                                     <p style="font-size:0.7rem; color:#555; margin:0;">Réf: ${order.id} • ${order.date}</p>
                                 </div>
                                 <div style="text-align:right;">
-                                    <div style="font-weight:600; color:var(--white);">${order.price} €</div>
+                                    <div style="font-weight:600; color:var(--white);">${order.price} $</div>
                                     ${order.status === 'En attente' ? 
                                     `<button class="btn-gold" style="padding:6px 12px; font-size:0.65rem; margin-top:8px; width:auto;" 
                                       onclick="handlePayment('${order.id}', '${order.paypalLink}')">PAYER</button>` : ''}
